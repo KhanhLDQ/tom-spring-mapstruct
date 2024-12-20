@@ -9,4 +9,8 @@ import lombok.ToString;
 public class PersonDTO {
     String firstName;
     String lastName;
+    String officeName;
+    String officeAddress;
+    String officeCountry;
+    Long officeZipCode;
 }
