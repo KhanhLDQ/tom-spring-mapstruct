@@ -10,4 +10,5 @@ public class Employee {
     Long id;
     String empFirstName;
     String empLastName;
+    Office office;
 }

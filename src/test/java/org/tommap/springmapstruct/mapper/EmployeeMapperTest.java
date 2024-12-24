@@ -13,30 +13,54 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class EmployeeMapperTest {
     EmployeeMapper employeeMapper;
+    Employee employee;
+    Office office;
 
     @BeforeEach
     void init() {
         employeeMapper = Mappers.getMapper(EmployeeMapper.class);
+
+        employee = new Employee();
+        employee.setId(1L);
+        employee.setEmpFirstName("Tom");
+        employee.setEmpLastName("Map");
+
+        office = new Office();
+        office.setId(1L);
+        office.setName("office");
+        office.setAddress("address");
+        office.setCountry("country");
+        office.setZipCode(12345L);
     }
 
     @Test
     @DisplayName("mapping - multiple sources")
     void testDifferentNameMapping() {
         //arrange
-        Employee employee = new Employee();
-        employee.setId(1L);
-        employee.setEmpFirstName("Tom");
-        employee.setEmpLastName("Map");
-
-        Office office = new Office();
-        office.setId(1L);
-        office.setName("office");
-        office.setAddress("address");
-        office.setCountry("country");
-        office.setZipCode(12345L);
 
         //act
         PersonDTO personDTO = employeeMapper.toPersonDTO(employee, office);
+
+        //assert
+        assertNotNull(employeeMapper, "employeeMapper is null");
+        assertNotNull(personDTO, "personDTO is null");
+
+        assertEquals("Tom", personDTO.getFirstName(), "firstName should be Tom");
+        assertEquals("Map", personDTO.getLastName(), "lastName should be Map");
+        assertEquals("office", personDTO.getOfficeName(), "officeName should be office");
+        assertEquals("address", personDTO.getOfficeAddress(), "officeAddress should be address");
+        assertEquals("country", personDTO.getOfficeCountry(), "officeCountry should be country");
+        assertEquals(12345L, personDTO.getOfficeZipCode(), "officeZipCode should be 12345");
+    }
+
+    @Test
+    @DisplayName("mapping - nested object")
+    void testNestedObjectMapping() {
+        //arrange
+        employee.setOffice(office);
+
+        //act
+        PersonDTO personDTO = employeeMapper.toPersonDTO(employee);
 
         //assert
         assertNotNull(employeeMapper, "employeeMapper is null");

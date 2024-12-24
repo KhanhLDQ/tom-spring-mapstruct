@@ -15,4 +15,12 @@ public interface EmployeeMapper {
     @Mapping(target = "officeCountry", source = "office.country")
     @Mapping(target = "officeZipCode", source = "office.zipCode")
     PersonDTO toPersonDTO(Employee employee, Office office);
+
+    @Mapping(target = "firstName", source = "empFirstName")
+    @Mapping(target = "lastName", source = "empLastName")
+    @Mapping(target = "officeName", source = "office.name")
+    @Mapping(target = "officeAddress", source = "office.address")
+    @Mapping(target = "officeCountry", source = "office.country")
+    @Mapping(target = "officeZipCode", source = "office.zipCode")
+    PersonDTO toPersonDTO(Employee employee);
 }
