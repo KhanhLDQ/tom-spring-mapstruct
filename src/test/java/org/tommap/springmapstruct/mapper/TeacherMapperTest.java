@@ -52,4 +52,31 @@ class TeacherMapperTest {
         assertEquals(5, teacherDTO.getServiceInYears(), "serviceInYears should be 5");
         assertEquals(2, teacherDTO.getUnemployedInYears(), "unemployedInYears should be 2");
     }
+
+    @Test
+    @DisplayName("test null person mapping")
+    void testNullPersonMapping() {
+        //arrange
+
+        //act
+        TeacherDTO teacherDTO = teacherMapper.toTeacherDTO(null);
+        System.out.println(teacherDTO);
+
+        //assert
+        assertNotNull(teacherDTO, "teacherDTO is null");
+    }
+
+    @Test
+    @DisplayName("test null dob mapping")
+    void testNullDobMapping() {
+        //arrange
+        teacher.setDob(null);
+
+        //act
+        TeacherDTO teacherDTO = teacherMapper.toTeacherDTO(teacher);
+
+        //assert
+        assertNotNull(teacherDTO, "teacherDTO is null");
+        assertEquals(0, teacherDTO.getAge(), "age should be 0");
+    }
 }
