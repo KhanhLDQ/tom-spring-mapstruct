@@ -68,15 +68,18 @@ class PersonMapperTest {
         assertEquals("Tom", personDTO.getFirstName(), "firstName should be Tom");
         assertEquals("Map", personDTO.getLastName(), "lastName should be Map");
         assertEquals(PersonType.MANAGER, personDTO.getType(), "personType should be MANAGER");
+        assertNull(personDTO.getOccupation(), "occupation should be null");
 
         //test update existing mapping
         person.setFirstName("TomII");
         person.setLastName("MapII");
+        person.setOccupation("Software Engineer");
         personMapper.updatePersonDTO(personDTO, person);
 
         assertNotNull(personDTO, "personDTO is null");
         assertEquals("TomII", personDTO.getFirstName(), "firstName should be TomII");
         assertEquals("MapII", personDTO.getLastName(), "lastName should be MapII");
+        assertEquals("Software Engineer", personDTO.getOccupation(), "occupation should be Software Engineer");
     }
 
     @Test
