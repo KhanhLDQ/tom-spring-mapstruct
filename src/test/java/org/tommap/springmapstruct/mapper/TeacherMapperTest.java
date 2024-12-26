@@ -112,7 +112,7 @@ class TeacherMapperTest {
     }
 
     @Test
-    @DisplayName("tes to female")
+    @DisplayName("test to female")
     void testToFemale() {
         //arrange
 
@@ -122,5 +122,6 @@ class TeacherMapperTest {
         //assert
         assertInstanceOf(FemaleTeacherDTO.class, female);
         assertEquals("Tom_Female_DTO", female.getGender());
+        assertEquals("Factory", ((FemaleTeacherDTO) female).getCreateBy());
     }
 }

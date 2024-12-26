@@ -14,13 +14,14 @@ import org.tommap.springmapstruct.source_package.Teacher;
 import org.tommap.springmapstruct.target_package.FemaleTeacherDTO;
 import org.tommap.springmapstruct.target_package.MaleTeacherDTO;
 import org.tommap.springmapstruct.target_package.TeacherDTO;
+import org.tommap.springmapstruct.util.FemaleDTOFactory;
 import org.tommap.springmapstruct.util.TeacherOperations;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Mapper(
-        uses = {TeacherOperations.class},
+        uses = {TeacherOperations.class, FemaleDTOFactory.class},
         nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT
 //        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, //default value - NullValueCheckStrategy.ON_IMPLICIT_CONVERSION
 //        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT
@@ -42,7 +43,7 @@ public interface TeacherMapper {
     @BeanMapping(resultType = MaleTeacherDTO.class)
     TeacherDTO toMale(Teacher teacher);
 
-    @BeanMapping(resultType = FemaleTeacherDTO.class)
+    @BeanMapping(resultType = FemaleTeacherDTO.class, qualifiedByName = "init")
     TeacherDTO toFemale(Teacher teacher);
 
     @Named("toAge")
