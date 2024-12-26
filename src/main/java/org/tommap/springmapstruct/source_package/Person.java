@@ -13,4 +13,5 @@ public class Person {
     String firstName;
     String lastName;
     Date dob;
+    PersonType personType;
 }
