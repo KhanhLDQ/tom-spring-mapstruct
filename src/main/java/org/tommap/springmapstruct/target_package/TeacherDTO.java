@@ -14,4 +14,5 @@ public class TeacherDTO {
     int age;
     int serviceInYears;
     int unemployedInYears;
+    int numOfYearsGraduated;
 }

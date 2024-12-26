@@ -14,4 +14,5 @@ public class Teacher {
     String lastName;
     Date dob;
     Double salary;
+    Date graduatedAt;
 }

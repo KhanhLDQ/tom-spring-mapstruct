@@ -13,6 +13,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TeacherMapperTest {
     TeacherMapper teacherMapper;
@@ -79,4 +80,16 @@ class TeacherMapperTest {
         assertNotNull(teacherDTO, "teacherDTO is null");
         assertEquals(0, teacherDTO.getAge(), "age should be 0");
     }
+
+//    @Test
+//    @DisplayName("test exception handling")
+//    void testExceptionHandling() {
+//        //arrange
+//        teacher.setGraduatedAt(new Date());
+//
+//        //act & assert
+//        assertThrows(RuntimeException.class, () -> {
+//            teacherMapper.toTeacherDTO(teacher);
+//        }, "toNumOfYearsGraduated should throw IllegalArgumentException");
+//    }
 }

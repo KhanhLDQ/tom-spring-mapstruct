@@ -30,6 +30,7 @@ public interface TeacherMapper {
     @Mapping(target = "age", source = "dob", qualifiedByName = "toAge", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     @Mapping(target = "serviceInYears", source = "dob", qualifiedByName = "toServiceInYears")
     @Mapping(target = "unemployedInYears", source = "dob", qualifiedByName = "toUnemployedInYears")
+//    @Mapping(target = "numOfYearsGraduated", source = "graduatedAt", qualifiedByName = "toNumOfYearsGraduated")
     TeacherDTO toTeacherDTO(Teacher teacher);
 
     @Named("toAge")
@@ -43,4 +44,9 @@ public interface TeacherMapper {
     default int toServiceInYears(Date dob) {
         return 5;
     }
+
+//    @Named("toNumOfYearsGraduated")
+//    default int toNumOfYearsGraduated(Date graduatedAt) throws IllegalArgumentException {
+//        throw new IllegalArgumentException();
+//    }
 }
