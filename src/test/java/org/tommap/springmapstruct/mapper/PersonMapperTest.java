@@ -104,4 +104,23 @@ class PersonMapperTest {
         assertEquals("Map", personDTOMap.get(1L).getLastName(), "lastName should be Map");
         assertEquals(PersonType.MANAGER, personDTOMap.get(1L).getType(), "personType should be MANAGER");
     }
+
+    @Test
+    @DisplayName("test mapping - stream")
+    void testStreamMapping() {
+        //arrange
+        person.setPersonType(PersonType.MANAGER);
+
+        List<Person> persons = new ArrayList<>();
+        persons.add(person);
+
+        //act
+        List<PersonDTO> personDTOs = personMapper.toPersonDTOStream(persons.stream()).toList();
+
+        //assert
+        assertFalse(personDTOs.isEmpty(), "personDTOs is empty");
+        assertEquals("Tom", personDTOs.get(0).getFirstName(), "firstName should be Tom");
+        assertEquals("Map", personDTOs.get(0).getLastName(), "lastName should be Map");
+        assertEquals(PersonType.MANAGER, personDTOs.get(0).getType(), "personType should be MANAGER");
+    }
 }

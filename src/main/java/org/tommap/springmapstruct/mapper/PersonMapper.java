@@ -7,6 +7,7 @@ import org.tommap.springmapstruct.target_package.PersonDTO;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Mapper
 public interface PersonMapper {
@@ -16,4 +17,6 @@ public interface PersonMapper {
     List<PersonDTO> toPersonDTOs(List<Person> persons);
 
     Map<Long, PersonDTO> toPersonDTOMap(Map<Long, Person> personMap);
+
+    Stream<PersonDTO> toPersonDTOStream(Stream<Person> personStream);
 }
