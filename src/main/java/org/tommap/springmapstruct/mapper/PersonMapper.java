@@ -12,7 +12,14 @@ import java.util.stream.Stream;
 
 @Mapper
 public interface PersonMapper {
+    /*
+        - defaultValue => if the source value is null, the default value will be used
+        - constant => provide a fixed & hardcoded value to the target field, regardless of the source field value
+     */
     @Mapping(target = "type", source = "personType")
+    @Mapping(target = "occupation", ignore = true)
+    @Mapping(target = "employmentStatus", source = "workStatus", defaultValue = "Unemployed")
+    @Mapping(target = "numOfChildren", constant = "5")
     PersonDTO toPersonDTO(Person person);
 
     List<PersonDTO> toPersonDTOs(List<Person> persons);

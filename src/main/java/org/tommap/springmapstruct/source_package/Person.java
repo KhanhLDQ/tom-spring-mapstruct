@@ -14,4 +14,7 @@ public class Person {
     String lastName;
     Date dob;
     PersonType personType;
+    String occupation;
+    String workStatus;
+    Integer numOfChildren;
 }

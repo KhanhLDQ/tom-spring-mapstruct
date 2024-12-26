@@ -19,4 +19,7 @@ public class PersonDTO {
     String officeCountry;
     Long officeZipCode;
     PersonType type;
+    String occupation;
+    String employmentStatus;
+    Integer numOfChildren;
 }

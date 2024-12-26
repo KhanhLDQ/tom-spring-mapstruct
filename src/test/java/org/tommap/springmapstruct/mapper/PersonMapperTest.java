@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class PersonMapperTest {
     PersonMapper personMapper;
@@ -131,5 +132,25 @@ class PersonMapperTest {
         assertEquals("Tom", personDTOs.get(0).getFirstName(), "firstName should be Tom");
         assertEquals("Map", personDTOs.get(0).getLastName(), "lastName should be Map");
         assertEquals(PersonType.MANAGER, personDTOs.get(0).getType(), "personType should be MANAGER");
+    }
+
+    @Test
+    @DisplayName("test mapping - ignore field & default & constant value")
+    void testIgnoreFieldAndDefaultValueAndConstantMapping() {
+        //arrange
+        person.setOccupation("Software Engineer");
+        person.setNumOfChildren(10);
+        System.out.println(person);
+
+        //act
+        PersonDTO personDTO = personMapper.toPersonDTO(person);
+
+        //assert
+        assertNotNull(personDTO, "personDTO is null");
+        assertEquals("Tom", personDTO.getFirstName(), "firstName should be Tom");
+        assertEquals("Map", personDTO.getLastName(), "lastName should be Map");
+        assertNull(personDTO.getOccupation(), "occupation should be null");
+        assertEquals("Unemployed", personDTO.getEmploymentStatus(), "employmentStatus should be Unemployed");
+        assertEquals(5, personDTO.getNumOfChildren(), "numOfChildren should be 5");
     }
 }
