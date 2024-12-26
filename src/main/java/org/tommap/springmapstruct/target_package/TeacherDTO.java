@@ -15,4 +15,6 @@ public class TeacherDTO {
     int serviceInYears;
     int unemployedInYears;
     int numOfYearsGraduated;
+    String fullName;
+    String unknown;
 }

@@ -1,7 +1,9 @@
 package org.tommap.springmapstruct.mapper;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValueMappingStrategy;
@@ -43,6 +45,13 @@ public interface TeacherMapper {
     @Named("toServiceInYears")
     default int toServiceInYears(Date dob) {
         return 5;
+    }
+
+    @AfterMapping
+    default void afterMapping(@MappingTarget TeacherDTO teacherDTO, Teacher teacher) {
+        if (null == teacherDTO.getFullName()) {
+            teacherDTO.setFullName("KhanhLQD");
+        }
     }
 
 //    @Named("toNumOfYearsGraduated")
