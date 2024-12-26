@@ -1,6 +1,7 @@
 package org.tommap.springmapstruct.mapper;
 
 import org.mapstruct.AfterMapping;
+import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -46,6 +47,23 @@ public interface TeacherMapper {
     default int toServiceInYears(Date dob) {
         return 5;
     }
+
+//    @BeforeMapping //before creating TeacherDTO instance
+//    default void beforeMapping() {
+//
+//    }
+
+    @BeforeMapping //after creating TeacherDTO instance
+    default void beforeMapping(@MappingTarget TeacherDTO teacherDTO, Teacher teacher) {
+        if (null == teacherDTO.getUnknown()) {
+            teacherDTO.setUnknown("unknown");
+        }
+    }
+
+//    @BeforeMapping //order of two beforeMapping methods in impl classes by default is same as in interface
+//    default void beforeMappingSecondPhase(@MappingTarget TeacherDTO teacherDTO, Teacher teacher) {
+//
+//    }
 
     @AfterMapping
     default void afterMapping(@MappingTarget TeacherDTO teacherDTO, Teacher teacher) {

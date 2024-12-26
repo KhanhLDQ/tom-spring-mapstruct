@@ -53,6 +53,7 @@ class TeacherMapperTest {
         assertEquals(5, teacherDTO.getServiceInYears(), "serviceInYears should be 5");
         assertEquals(2, teacherDTO.getUnemployedInYears(), "unemployedInYears should be 2");
         assertEquals("KhanhLQD", teacherDTO.getFullName(), "fullName should be KhanhLQD");
+        assertEquals("unknown", teacherDTO.getUnknown(), "unknown should be unknown");
     }
 
     @Test
