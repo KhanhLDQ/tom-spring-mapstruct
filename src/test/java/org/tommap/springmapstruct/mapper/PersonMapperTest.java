@@ -144,6 +144,7 @@ class PersonMapperTest {
 
         //act
         PersonDTO personDTO = personMapper.toPersonDTO(person);
+        System.out.println(personDTO);
 
         //assert
         assertNotNull(personDTO, "personDTO is null");
@@ -152,5 +153,22 @@ class PersonMapperTest {
         assertNull(personDTO.getOccupation(), "occupation should be null");
         assertEquals("Unemployed", personDTO.getEmploymentStatus(), "employmentStatus should be Unemployed");
         assertEquals(5, personDTO.getNumOfChildren(), "numOfChildren should be 5");
+        assertEquals("I am a Software Engineer.", personDTO.getIntroduction(), "introduction should be I am a Software Engineer.");
+    }
+
+    @Test
+    @DisplayName("test mapping -expression")
+    void testMappingExpression() {
+        //arrange
+
+        //act
+        PersonDTO personDTO = personMapper.toPersonDTO(person);
+        System.out.println(personDTO);
+
+        //assert
+        assertNotNull(personDTO, "personDTO is null");
+        assertEquals("Tom", personDTO.getFirstName(), "firstName should be Tom");
+        assertEquals("Map", personDTO.getLastName(), "lastName should be Map");
+        assertEquals(27, personDTO.getAge(), "age should be 27");
     }
 }

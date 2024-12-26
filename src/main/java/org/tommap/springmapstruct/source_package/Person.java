@@ -17,4 +17,5 @@ public class Person {
     String occupation;
     String workStatus;
     Integer numOfChildren;
+    String shortInfo;
 }

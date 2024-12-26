@@ -6,8 +6,10 @@ import org.mapstruct.MappingTarget;
 import org.tommap.springmapstruct.source_package.Person;
 import org.tommap.springmapstruct.target_package.PersonDTO;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 @Mapper
@@ -20,7 +22,15 @@ public interface PersonMapper {
     @Mapping(target = "occupation", ignore = true)
     @Mapping(target = "employmentStatus", source = "workStatus", defaultValue = "Unemployed")
     @Mapping(target = "numOfChildren", constant = "5")
+    @Mapping(target = "age", expression = "java(calculateAge(person.getDob()))")
+    @Mapping(target = "introduction", source = "shortInfo", defaultExpression = "java(\"I am a \"+person.getOccupation()+\".\")")
     PersonDTO toPersonDTO(Person person);
+
+    default Integer calculateAge(Date dob) {
+        long diffInMillis = Math.abs(new Date().getTime() - dob.getTime());
+        long diffInDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+        return (int) (diffInDays / 365);
+    }
 
     List<PersonDTO> toPersonDTOs(List<Person> persons);
 

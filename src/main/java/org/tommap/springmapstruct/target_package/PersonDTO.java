@@ -22,4 +22,6 @@ public class PersonDTO {
     String occupation;
     String employmentStatus;
     Integer numOfChildren;
+    Integer age;
+    String introduction;
 }
