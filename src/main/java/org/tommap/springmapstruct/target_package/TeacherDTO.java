@@ -17,4 +17,5 @@ public class TeacherDTO {
     int numOfYearsGraduated;
     String fullName;
     String unknown;
+    String gender;
 }

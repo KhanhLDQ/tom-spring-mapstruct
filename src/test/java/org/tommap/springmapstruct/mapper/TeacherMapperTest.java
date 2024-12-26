@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.tommap.springmapstruct.source_package.Teacher;
+import org.tommap.springmapstruct.target_package.FemaleTeacherDTO;
+import org.tommap.springmapstruct.target_package.MaleTeacherDTO;
 import org.tommap.springmapstruct.target_package.TeacherDTO;
 
 import java.text.ParseException;
@@ -12,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -94,4 +97,30 @@ class TeacherMapperTest {
 //            teacherMapper.toTeacherDTO(teacher);
 //        }, "toNumOfYearsGraduated should throw IllegalArgumentException");
 //    }
+
+    @Test
+    @DisplayName("test to male")
+    void testToMale() {
+        //arrange
+
+        //act
+        TeacherDTO male = teacherMapper.toMale(teacher);
+
+        //assert
+        assertInstanceOf(MaleTeacherDTO.class, male);
+        assertEquals("Tom_Male_DTO", male.getGender());
+    }
+
+    @Test
+    @DisplayName("tes to female")
+    void testToFemale() {
+        //arrange
+
+        //act
+        TeacherDTO female = teacherMapper.toFemale(teacher);
+
+        //assert
+        assertInstanceOf(FemaleTeacherDTO.class, female);
+        assertEquals("Tom_Female_DTO", female.getGender());
+    }
 }

@@ -1,6 +1,7 @@
 package org.tommap.springmapstruct.mapper;
 
 import org.mapstruct.AfterMapping;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +11,8 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.tommap.springmapstruct.source_package.Teacher;
+import org.tommap.springmapstruct.target_package.FemaleTeacherDTO;
+import org.tommap.springmapstruct.target_package.MaleTeacherDTO;
 import org.tommap.springmapstruct.target_package.TeacherDTO;
 import org.tommap.springmapstruct.util.TeacherOperations;
 
@@ -35,6 +38,12 @@ public interface TeacherMapper {
     @Mapping(target = "unemployedInYears", source = "dob", qualifiedByName = "toUnemployedInYears")
 //    @Mapping(target = "numOfYearsGraduated", source = "graduatedAt", qualifiedByName = "toNumOfYearsGraduated")
     TeacherDTO toTeacherDTO(Teacher teacher);
+
+    @BeanMapping(resultType = MaleTeacherDTO.class)
+    TeacherDTO toMale(Teacher teacher);
+
+    @BeanMapping(resultType = FemaleTeacherDTO.class)
+    TeacherDTO toFemale(Teacher teacher);
 
     @Named("toAge")
     default int toAge(Date dob) {
