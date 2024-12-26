@@ -10,9 +10,14 @@ import org.tommap.springmapstruct.target_package.PersonDTO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class PersonMapperTest {
@@ -62,5 +67,41 @@ class PersonMapperTest {
         assertEquals("Tom", personDTO.getFirstName(), "firstName should be Tom");
         assertEquals("Map", personDTO.getLastName(), "lastName should be Map");
         assertEquals(PersonType.MANAGER, personDTO.getType(), "personType should be MANAGER");
+    }
+
+    @Test
+    @DisplayName("test mapping - list collection")
+    void testMappingListCollection() {
+        //arrange
+        person.setPersonType(PersonType.MANAGER);
+
+        List<Person> persons = new ArrayList<>();
+        persons.add(person);
+
+        //act
+        List<PersonDTO> personDTOs = personMapper.toPersonDTOs(persons);
+
+        //assert
+        assertFalse(personDTOs.isEmpty(), "personDTOs is empty");
+        assertEquals("Tom", personDTOs.get(0).getFirstName(), "firstName should be Tom");
+        assertEquals("Map", personDTOs.get(0).getLastName(), "lastName should be Map");
+        assertEquals(PersonType.MANAGER, personDTOs.get(0).getType(), "personType should be MANAGER");
+    }
+
+    @Test
+    @DisplayName("test mapping - map collection")
+    void testMappingMapCollection() {
+        //arrange
+        person.setPersonType(PersonType.MANAGER);
+        Map<Long, Person> personMap = Map.of(1L, person);
+
+        //act
+        Map<Long, PersonDTO> personDTOMap = personMapper.toPersonDTOMap(personMap);
+
+        //assert
+        assertInstanceOf(PersonDTO.class, personDTOMap.get(1L), "personDTO is not instance of PersonDTO");
+        assertEquals("Tom", personDTOMap.get(1L).getFirstName(), "firstName should be Tom");
+        assertEquals("Map", personDTOMap.get(1L).getLastName(), "lastName should be Map");
+        assertEquals(PersonType.MANAGER, personDTOMap.get(1L).getType(), "personType should be MANAGER");
     }
 }

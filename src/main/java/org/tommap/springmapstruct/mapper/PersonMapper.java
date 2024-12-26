@@ -5,8 +5,15 @@ import org.mapstruct.Mapping;
 import org.tommap.springmapstruct.source_package.Person;
 import org.tommap.springmapstruct.target_package.PersonDTO;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface PersonMapper {
     @Mapping(target = "type", source = "personType")
     PersonDTO toPersonDTO(Person person);
+
+    List<PersonDTO> toPersonDTOs(List<Person> persons);
+
+    Map<Long, PersonDTO> toPersonDTOMap(Map<Long, Person> personMap);
 }
